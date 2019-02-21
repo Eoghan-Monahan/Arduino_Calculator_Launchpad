@@ -12,6 +12,7 @@ void loop() {
   int i;
   int j = 0;
   String inputs = "";
+  //reads in all inputs
   for (i = 2; i < 14; i++) {
     inputs += (char) digitalRead(i);
   }
