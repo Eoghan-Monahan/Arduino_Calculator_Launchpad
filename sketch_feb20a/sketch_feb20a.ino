@@ -1,100 +1,43 @@
-int i;
-String inputs;
-#define input;
-#define button1;
-#define button2;
-#define button3;
-#define button4;
-#define button5;
-#define button6;
-#define button7;
-#define button8;
-#define button9;
-#define button10;
-#define button11;
-#define button12;
-#define button13;
-#define button14;
-#define button15;
-#define button16;
-#define button17;
-#define button18;
-#define button19;
-#define button20;
-#define button21;
-#define button22;
-#define button23;
-#define button24;
-#define button25;
+/*4x4 Matrix Keypad connected to Arduino
+This code prints the key pressed on the keypad to the serial port*/
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(31250);
-  for (i = 2; i < 14; i++) {
-    pinMode(i, INPUT);
-  }
+#include <Keypad.h>
+
+const byte numRows= 4; //number of rows on the keypad
+const byte numCols= 4; //number of columns on the keypad
+
+//keymap defines the key pressed according to the row and columns just as appears on the keypad
+char keymap[numRows][numCols]=
+{
+{'1', '2', '3', 'A'},
+{'4', '5', '6', 'B'},
+{'7', '8', '9', 'C'},
+{'*', '0', '#', 'D'}
+};
+
+//Code that shows the the keypad connections to the arduino terminals
+byte rowPins[numRows] = {9,8,7,6}; //Rows 0 to 3
+byte colPins[numCols]= {5,4,3,2}; //Columns 0 to 3
+
+//initializes an instance of the Keypad class
+Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+
+void setup()
+{
+Serial.begin(9600);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  for (i = 2; i < 14; i++) {
-    inputs.concat( digitalRead(i));
-  }
-  
-  input = inputs.toInt();
-  switch (inputInt) {
-    case(button1):
-      break;
-    case(button2):
-      break;  
-    case(button3):
-      break;
-    case(button4):
-      break;
-    case(button5):
-      break;
-    case(button6):
-      break;
-    case(button7):
-      break;
-    case(button8):
-      break;
-    case(button9):
-      break;
-    case(button10):
-      break;
-    case(button11):
-      break;
-    case(button12):
-      break;
-    case(button13):
-      break;
-    case(button14):
-      break;
-    case(button15):
-      break;
-    case(button16):
-      break;
-    case(button17):
-      break;
-    case(button18):
-      break;
-    case(button19):
-      break;
-    case(button20):
-      break;
-    case(button21):
-      break;
-    case(button22):
-      break;
-    case(button23):
-      break;
-    case(button24):
-      break;
-    case(button25):
-      break;
-    default:
-      delay(20ms);
-      breal;
-  }
+//If key is pressed, this key is stored in 'keypressed' variable
+//If key is not equal to 'NO_KEY', then this key is printed out
+//if count=17, then count is reset back to 0 (this means no key is pressed during the whole keypad scan process
+void loop()
+{
+for (int i=0; i<9; i++) {
+//char keypressed = '9';
+char keypressed = myKeypad.getKey();
+if (keypressed != NO_KEY)
+{
+Serial.println(keypressed);
+}
+}
 }
