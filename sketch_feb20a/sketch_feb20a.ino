@@ -1,97 +1,66 @@
-int i;
-String inputs;
-#define input;
-#define button1;
-#define button2;
-#define button3;
-#define button4;
-#define button5;
-#define button6;
-#define button7;
-#define button8;
-#define button9;
-#define button10;
-#define button11;
-#define button12;
-#define button13;
-#define button14;
-#define button15;
-#define button16;
-#define button17;
-#define button18;
-#define button19;
-#define button20;
-#define button21;
-#define button22;
-#define button23;
-#define button24;
-#define button25;
+#include <Keypad.h>
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(31250);
-  for (i = 2; i < 14; i++) {
-    pinMode(i, INPUT);
-  }
+const byte numRows= 4; //number of rows on the keypad
+const byte numCols= 4; //number of columns on the keypad
+
+//keymap defines the key pressed according to the row and columns just as appears on the keypad
+char keymap[numRows][numCols]=
+{
+{'1', '2', '3', 'A'},
+{'4', '5', '6', 'B'},
+{'7', '8', '9', 'C'},
+{'*', '0', '#', 'D'}
+};
+
+//Code that shows the the keypad connections to the arduino terminals
+byte rowPins[numRows] = {9,8,7,6}; //Rows 0 to 3
+byte colPins[numCols]= {5,4,3,2}; //Columns 0 to 3
+
+//initializes an instance of the Keypad class
+Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+
+void setup()
+{
+Serial.begin(38400);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (i = 2; i < 14; i++) {
-    inputs.concat( digitalRead(i));
+  for (int i=0; i<9; i++) {
+  char keypressed = myKeypad.getKey();
   }
-  
-  input = inputs.toInt();
-  switch (inputInt) {
-    case(button1):
+  switch (keypressed) {
+    case('1'):
       break;
-    case(button2):
-      break;  
-    case(button3):
+    case('2'):
       break;
-    case(button4):
+    case('3'):
       break;
-    case(button5):
+    case('4'):
       break;
-    case(button6):
+    case('5'):
       break;
-    case(button7):
+    case('6'):
       break;
-    case(button8):
+    case('7'):
       break;
-    case(button9):
+    case('8'):
       break;
-    case(button10):
+    case('9'):
       break;
-    case(button11):
+    case('0'):
       break;
-    case(button12):
+    case('A'):
       break;
-    case(button13):
+    case('B'):
       break;
-    case(button14):
+    case('C'):
       break;
-    case(button15):
+    case('D'):
       break;
-    case(button16):
+    case('*'):
       break;
-    case(button17):
-      break;
-    case(button18):
-      break;
-    case(button19):
-      break;
-    case(button20):
-      break;
-    case(button21):
-      break;
-    case(button22):
-      break;
-    case(button23):
-      break;
-    case(button24):
-      break;
-    case(button25):
+    case('#'):
       break;
     default:
       delay(20ms);
